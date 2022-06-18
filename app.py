@@ -8,8 +8,9 @@ screenEntry.grid(row=0, column=0, columnspan=3)
 
 # funcs
 def display_num(num):
+    current = screenEntry.get()
     screenEntry.delete(0, END)
-    screenEntry.insert(0, num)
+    screenEntry.insert(0, str(current) + str(num))
 
 # define numbers
 num7 = Button(window, text="7", width = 9, command=lambda: display_num(7)).grid(row=1, column=0)
