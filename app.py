@@ -1,7 +1,9 @@
-from operator import eq
 from tkinter import *
 
 window = Tk()
+
+# global variables
+mode = ""
 
 # funcs
 def display_num(num):
@@ -13,15 +15,58 @@ def clear_num():
     screenEntry.delete(0, END)
 
 def add_nums():
+    global mode
+    mode = "add"                                    # set calc mode to add
+
     firstNum = screenEntry.get()
     global fNum                                     # create global var that holds the firsNum
     fNum = int(firstNum)
+    
+    screenEntry.delete(0, END)
+
+def sub_nums():
+    global mode
+    mode = "sub"                                    # set calc mode to sub
+
+    firstNum = screenEntry.get()
+    global fNum                                     # create global var that holds the firsNum
+    fNum = int(firstNum)
+
+    screenEntry.delete(0, END)
+
+def mult_nums():
+    global mode
+    mode = "mult"                                    # set calc mode to sub
+
+    firstNum = screenEntry.get()
+    global fNum                                     # create global var that holds the firsNum
+    fNum = int(firstNum)
+
+    screenEntry.delete(0, END)
+
+def div_nums():
+    global mode
+    mode = "div"                                    # set calc mode to sub
+
+    firstNum = screenEntry.get()
+    global fNum                                     # create global var that holds the firsNum
+    fNum = int(firstNum)
+
     screenEntry.delete(0, END)
 
 def equal():
     secondtNum = int(screenEntry.get())
     screenEntry.delete(0, END)
-    result = secondtNum + fNum
+
+    if mode == "add":
+        result = fNum + secondtNum
+    elif mode == "sub":
+        result = fNum - secondtNum
+    elif mode == "mult":
+        result = fNum * secondtNum
+    else:
+        result = fNum / secondtNum
+
     screenEntry.insert(0, result)
 
 # create number screen
@@ -46,5 +91,10 @@ clear = Button(window, text="Clear", width=20, pady=5, command=clear_num).grid(r
 
 plus = Button(window, text="+", width = 9, pady=5, command=add_nums).grid(row=5, column=0)
 equality = Button(window, text="=", width=20, pady=5, command=equal).grid(row=5, column=1, columnspan=2)
+
+subtract = Button(window, text="-", width = 9, pady=5, command=sub_nums).grid(row=6, column=0)
+multiply = Button(window, text="x", width = 9, pady=5, command=mult_nums).grid(row=6, column=1)
+divide = Button(window, text="/", width = 9, pady=5, command=div_nums).grid(row=6, column=2)
+
 
 window.mainloop()
